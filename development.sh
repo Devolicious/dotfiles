@@ -1,6 +1,35 @@
+function dev() {
+    cd ~/Development/$1
+}
+
 function pr() {
     cd ~/projects/$1
 }
+
+function pra() {
+    cd ~/projects/$1/app
+}
+
+function pre() {
+    cd ~/projects/$1/environment
+}
+
+_prComplete()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$(ls ~/projects/)" -- $cur) )
+}
+
+_devComplete()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$(ls ~/Development/)" -- $cur) )
+}
+
+complete -F _prComplete pr
+complete -F _prComplete pra
+complete -F _prComplete pre
+complete -F _devComplete dev
 
 #function _prcomplete()
 #{
